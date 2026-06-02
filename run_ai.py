@@ -5,14 +5,18 @@ from datetime import datetime
 API_KEY = os.getenv("API_KEY")
 IMG_PATH = "图片"
 OUT_PATH = "输出"
+# 提前强制创建文件夹，没有就自动新建，解决找不到目录报错
+os.makedirs(IMG_PATH, exist_ok=True)
 os.makedirs(OUT_PATH, exist_ok=True)
 
-# 小红书文案固定提示词
 prompt = """你是小红书电影博主，根据配图写笔记：
 1.开头吸睛标题带emoji，正文130字左右，口语种草
 2.末尾带上#电影推荐 #高分电影 #影视解说 相关标签
 3.严格分成【标题】【正文】【话题】三段"""
 
+# 没有图片直接退出不报错
+if not os.path.exists(IMG_PATH):
+    exit()
 img_files = [i for i in os.listdir(IMG_PATH) if i.endswith(("png","jpg","jpeg"))]
 if not img_files:
     exit()
