@@ -29,7 +29,7 @@ if not img_files:
 
 for pic_name in img_files:
     headers = {"Authorization":f"Bearer {API_KEY}", "Content-Type":"application/json"}
-    body = {"model":"deepseek-v3","messages":[{"role":"user","content":prompt}]}
+    body = {"model":"deepseek-v4-pro","messages":[{"role":"user","content":prompt}]}
     try:
         res = requests.post("https://api.deepseek.com/v1/chat/completions",json=body,headers=headers,timeout=30)
         print("接口返回原文：",res.text)
