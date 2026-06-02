@@ -1,0 +1,28 @@
+name: 自动生成小红书电影文案
+on:
+  push:
+    paths:
+      - 'images/**'
+jobs:
+  run-ai:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+      - name: 配置Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: 安装依赖
+        run: pip install requests pillow
+      - name: 执行AI脚本
+        env:
+          API_KEY: ${{ secrets.AI_APIKEY }}
+        run: python run_ai.py
+      - name: 保存生成文案
+        run: |
+          git config --global user.name "文案机器人"
+          git config --global user.email "auto@bot.com"
+          git add output/
+          git commit -m "自动生成文案" || true
+          git push
