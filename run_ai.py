@@ -29,7 +29,5 @@ for pic_name in img_files:
     save_name = f"{datetime.now().strftime('%Y%m%d')}_{pic_name[:-4]}.md"
     with open(f"{OUT_PATH}/{save_name}","w",encoding="utf-8") as f:
         f.write(article)
-with open(f"{OUT_PATH}/{save_name}","w",encoding="utf-8") as f:
-    f.write(article)
 # 新增这一行！
 print(article)
