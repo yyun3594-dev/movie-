@@ -3,8 +3,8 @@ import requests
 from datetime import datetime
 
 API_KEY = os.getenv("API_KEY")
-IMG_PATH = "图片"
-OUT_PATH = "输出"
+IMG_PATH = "images"
+OUT_PATH = "output"
 # 提前强制创建文件夹，没有就自动新建，解决找不到目录报错
 os.makedirs(IMG_PATH, exist_ok=True)
 os.makedirs(OUT_PATH, exist_ok=True)
