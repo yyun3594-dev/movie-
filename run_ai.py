@@ -28,11 +28,11 @@ if not img_files:
     exit(1)
 
 for pic_name in img_files:
-    headers = {"Authorization":f"Bearer {API_KEY}", "Content-Type":"application/json"}
+        headers = {"Authorization":f"Bearer {API_KEY}", "Content-Type":"application/json"}
 # 把图片名字拼进提示词，AI自动根据文件名写文案
-new_msg = f"海报文件名：{pic_name}\n{prompt}"
-body = {"model":"deepseek-v4-pro","messages":[{"role":"user","content":new_msg}]}
-    try:
+        new_msg = f"海报文件名：{pic_name}\n{prompt}"
+        body = {"model":"deepseek-v4-pro","messages":[{"role":"user","content":new_msg}]}
+        try:
         res = requests.post("https://api.deepseek.com/v1/chat/completions",json=body,headers=headers,timeout=30)
         print("接口返回原文：",res.text)
         article = res.json()["choices"][0]["message"]["content"]
@@ -40,7 +40,7 @@ body = {"model":"deepseek-v4-pro","messages":[{"role":"user","content":new_msg}]
         print("接口异常：",e)
         exit(1)
 
-    save_name = f"{datetime.now().strftime('%Y%m%d')}_{pic_name[:-4]}.md"
+        save_name = f"{datetime.now().strftime('%Y%m%d')}_{pic_name[:-4]}.md"
     with open(os.path.join(OUT_PATH,save_name),"w",encoding="utf-8") as f:
         f.write(article)
     print("\n========最终文案========\n",article)
