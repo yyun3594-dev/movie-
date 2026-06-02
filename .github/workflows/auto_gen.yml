@@ -6,6 +6,7 @@ on:
 jobs:
   run-ai:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: 拉取代码
         uses: actions/checkout@v4
@@ -20,7 +21,6 @@ jobs:
           API_KEY: ${{ secrets.AI_APIKEY }}
         run: python run_ai.py
       - name: 保存生成文案
-        permissions: write-all
         run: |
           git config --global user.name "文案机器人"
           git config --global user.email "auto@bot.com"
