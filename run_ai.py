@@ -29,7 +29,9 @@ if not img_files:
 
 for pic_name in img_files:
     headers = {"Authorization":f"Bearer {API_KEY}", "Content-Type":"application/json"}
-    body = {"model":"deepseek-v4-pro","messages":[{"role":"user","content":prompt}]}
+# 把图片名字拼进提示词，AI自动根据文件名写文案
+new_msg = f"海报文件名：{pic_name}\n{prompt}"
+body = {"model":"deepseek-v4-pro","messages":[{"role":"user","content":new_msg}]}
     try:
         res = requests.post("https://api.deepseek.com/v1/chat/completions",json=body,headers=headers,timeout=30)
         print("接口返回原文：",res.text)
