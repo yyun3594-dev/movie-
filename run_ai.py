@@ -31,3 +31,14 @@ for pic_name in img_files:
         f.write(article)
 # 新增这一行！
 print(article)
+try:
+    res = requests.post("https://api.deepseek.com/v1/chat/completions",json=body,headers=headers)
+    article = res.json()["choices"][0]["message"]["content"]
+except Exception as e:
+    print("接口报错：",e)
+    exit()
+
+save_name = f"{datetime.now().strftime('%Y%m%d')}_{pic_name[:-4]}.md"
+with open(f"{OUT_PATH}/{save_name}","w",encoding="utf-8") as f:
+    f.write(article)
+print(article)
